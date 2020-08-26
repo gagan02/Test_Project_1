@@ -134,6 +134,7 @@ body {
     &::placeholder {
       color: #b3b3b3;
     }
+
     &:focus {
       border-color: $text-color-light;
     }
@@ -158,6 +159,7 @@ body {
         color: $text-color-light;
         background: none;
       }
+
       &:hover {
         color: #fff;
         background-color: lighten($text-color, 10%);
