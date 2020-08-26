@@ -1,0 +1,167 @@
+/* Variables */
+$primary-color: #000;
+$secondary-color: #373737;
+$text-color: #666;
+$text-color-light: #999;
+
+/* Mixins */
+@mixin position($position, $top: false, $right: false, $bottom: false, $left: false, $zIndex: false) {
+  position: $position;
+  @if $top {
+      top: $top;
+  }
+  @if $right {
+      right: $right;
+  }
+  @if $bottom {
+      bottom: $bottom;
+  }
+  @if $left {
+      left: $left;
+  }
+  @if $zIndex {
+      z-index: $zIndex;
+  }
+}
+
+@mixin flex($display, $justifyContent: false, $alignItems: false, $flexDirection: false) {
+  display: $display;
+  @if $justifyContent {
+      justify-content: $justifyContent;
+  }
+  @if $alignItems {
+      align-items: $alignItems;
+  }
+  @if $flexDirection {
+      flex-direction: $flexDirection;
+  }
+}
+
+/* Css */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: $text-color;
+}
+
+.popupBox {
+  @include position(fixed, 0, 0, 0, 0);
+  @include flex(flex, center, flex-end);
+  background-color: rgba($color: #000, $alpha: .5);
+
+  .popup {
+    padding: 20px;
+    width: 420px;
+    border-radius: 10px 10px 0 0;
+    background-color: #fff;
+  }
+
+  .block-list {
+    .block {
+      .name {
+        color: $primary-color;
+        span {
+          color: $text-color;
+        }
+      }
+    }
+  }
+
+  .block {
+    @include flex(flex, false);
+
+    & + .block {
+      margin-top: 25px;
+    }
+
+    figure {
+      margin-right: 15px;
+      min-width: 45px;
+      height:45px;
+      border-radius: 50%;
+      position: relative;
+      background-color: rgba($color: #000, $alpha: .1)
+    }
+
+    .tick {
+      @include position(absolute, false, -6px, -2px);
+      @include flex(flex, center, center);
+      padding-bottom: 2px;
+      width: 24px;
+      height: 24px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      background-color: #1eb996;
+      &:after{
+        content: '';
+        display: block;
+        width: 4px;
+        height: 8px;
+        border: solid #fff;
+        border-width: 0 1px 1px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    .name {
+      font-size: 18px;
+      color: $secondary-color;
+      word-break: break-all;
+      span {
+        margin-top: 5px;
+        display: block;
+        color: $text-color-light;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .searchField {
+    padding: 12px 15px;
+    margin: 15px 0 25px;
+    display: block;
+    width: 100%;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    font-size: 16px;
+    outline: 0;
+    &::placeholder {
+      color: #b3b3b3;
+    }
+    &:focus {
+      border-color: $text-color-light;
+    }
+  }
+
+  .btnWrap {
+    @include flex(flex, flex-end);
+    margin-top: 30px;
+
+    .btn {
+      @include flex(flex, center, center);
+      padding: 15px 30px;
+      margin-left: 10px;
+      color: #fff;
+      font-size: 18px;
+      height: 44px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      background-color: #d5d5d5;
+      &:first-child {
+        color: $text-color-light;
+        background: none;
+      }
+      &:hover {
+        color: #fff;
+        background-color: lighten($text-color, 10%);
+      }
+    }
+  }
+}
